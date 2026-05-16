@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UP2 Glow Clinic - Premium Aesthetic & Skincare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e', // Primary Pink/Rose
+                            600: '#e11d48',
+                            900: '#881337',
+                        },
+                        nude: {
+                            50: '#fdfbf7',
+                            100: '#f8f4eb',
+                            200: '#f1e8d5',
+                            300: '#e7d5b8',
+                            800: '#6b5134',
+                        },
+                        dark: '#1e1b4b' // Deep purple-black for elegant text
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Premium Glass Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s ease-in-out;
+        }
+        .glass-nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.08);
+            border-bottom: 1px solid rgba(255, 228, 230, 0.8);
+        }
+        
+        /* Floating Animations */
+        .wa-float {
+            animation: bounce-slight 2.5s infinite ease-in-out;
+        }
+        @keyframes bounce-slight {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float-slow {
+            animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 5s ease-in-out infinite;
+            animation-delay: 2.5s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        /* Pulse Glow Animation */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Nav Link Hover Underline */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f43f5e;
+            transition: width 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Custom Soft Gradient Backgrounds */
+        .bg-soft-gradient {
+            background: linear-gradient(135deg, #fdfbf7 0%, #ffe4e6 50%, #f3e8ff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(244, 63, 94, 0.05);
+        }
+
+        /* Accordion transition */
+        .faq-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .faq-content.open {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body class="font-sans text-gray-600 antialiased bg-nude-50 selection:bg-brand-300 selection:text-dark">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav id="navbar" class="fixed w-full z-[100] glass-nav h-20 transition-all duration-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div id="nav-container" class="flex justify-between items-center h-full">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center gap-2 group">
+                        <img src="https://lh3.googleusercontent.com/d/1r4OLymlwKHQuuNCIgdUVNAk7BLofBrUf" alt="UP Logo" class="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                        <span class="font-extrabold text-xl tracking-tight text-dark">
+                            UP2 <span class="font-light text-brand-500">Glow Clinic</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#tentang" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">Tentang</a>
+                    <a href="#treatment" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">Treatment</a>
+                    <a href="#promo" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">Promo</a>
+                    <a href="#testimoni" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">Testimoni</a>
+                    <a href="#lokasi" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">Cabang</a>
+                    <a href="#faq" class="nav-link text-sm text-dark hover:text-brand-600 font-semibold transition-colors">FAQ</a>
+                    
+                    <div class="pl-4 border-l border-brand-100 flex items-center relative group/btn">
+                        <!-- Pulse Glow Background -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-400 to-purple-400 rounded-full blur opacity-40 group-hover/btn:opacity-100 transition duration-500 animate-pulse-glow"></div>
+                        <a href="https://wa.link/i8w855" target="_blank" class="relative bg-dark hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all transform hover:-translate-y-0.5 flex items-center gap-2 shadow-lg border border-gray-700">
+                            Booking Konsultasi <i class="fas fa-calendar-check text-brand-400"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-dark hover:text-brand-500 focus:outline-none p-2 transition-colors">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-brand-50 absolute w-full shadow-2xl">
+            <div class="px-4 pt-4 pb-8 space-y-2">
+                <a href="#tentang" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">Tentang</a>
+                <a href="#treatment" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">Treatment</a>
+                <a href="#promo" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">Promo</a>
+                <a href="#testimoni" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">Testimoni</a>
+                <a href="#lokasi" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">Cabang</a>
+                <a href="#faq" class="block px-4 py-3 text-base font-semibold text-dark hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors">FAQ</a>
+                <a href="https://wa.link/i8w855" target="_blank" class="block text-center mt-4 px-4 py-3 text-base font-bold text-white bg-dark rounded-xl shadow-md">Booking Konsultasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-soft-gradient">
+        <!-- Abstract Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div class="absolute -top-32 -right-32 w-[30rem] h-[30rem] bg-brand-200/40 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 -left-20 w-80 h-80 bg-purple-200/40 rounded-full blur-[80px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                
+                <!-- Left: Typography & CTA -->
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <p class="text-[10px] md:text-xs text-brand-500 font-extrabold uppercase tracking-[0.15em] mb-4 opacity-80">
+                        Demo Template Landing Page Klinik - UP2WebKit.
+                    </p>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-brand-600 font-bold text-xs mb-6 uppercase tracking-widest">
+                        <i class="fas fa-sparkles text-brand-400"></i> Premium Aesthetic Clinic
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark tracking-tight leading-[1.15]">
+                        Glow Natural,<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-purple-500">Cantik Lebih Percaya Diri</span>
+                    </h1>
+                    <p class="mt-6 text-base text-gray-500 sm:text-lg lg:text-xl lg:max-w-lg leading-relaxed">
+                        Perawatan modern dengan teknologi terkini dan dokter profesional untuk membantu Anda tampil lebih sehat, cerah, dan percaya diri setiap hari.
+                    </p>
+                    <div class="mt-10 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.link/i8w855" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-white bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 transition-all shadow-[0_8px_25px_rgba(244,63,94,0.35)] transform hover:-translate-y-1">
+                            <i class="fab fa-whatsapp mr-2 text-xl"></i> Booking via WhatsApp
+                        </a>
+                        <a href="#treatment" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-brand-200 text-base font-bold rounded-full text-brand-600 bg-white/50 hover:bg-white hover:border-brand-300 transition-all shadow-sm hover:shadow-md backdrop-blur-sm">
+                            Lihat Treatment
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Visual & Floating Cards -->
+                <div class="mt-16 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="relative mx-auto w-full lg:max-w-md">
+                        <!-- Main Image (Rounded Custom Shape) - Premium Medical Treatment Aesthetic -->
+                        <div class="relative z-10 rounded-[2.5rem] rounded-tr-[5rem] rounded-bl-[5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] group">
+                            <img class="w-full h-full object-cover aspect-[4/5] group-hover:scale-105 transition-transform duration-1000" src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Premium Medical Beauty Treatment">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </div>
+                        
+                        <!-- Accent Background element -->
+                        <div class="absolute -top-6 -right-6 w-full h-full rounded-[2.5rem] rounded-tr-[5rem] rounded-bl-[5rem] border-2 border-brand-300 -z-0"></div>
+
+                        <!-- Floating Badge 1: 5000+ Happy Client -->
+                        <div class="absolute top-10 -left-8 sm:-left-12 glass-card p-4 rounded-2xl hidden sm:flex items-center gap-3 animate-float-slow z-20">
+                            <div class="w-10 h-10 bg-gradient-to-br from-brand-400 to-brand-600 text-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-extrabold text-dark leading-tight">5000+</p>
+                                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Happy Client</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 2: BPOM Approved -->
+                        <div class="absolute bottom-24 -left-6 sm:-left-8 glass-card p-4 rounded-2xl hidden sm:flex items-center gap-3 animate-float-delayed z-20">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="fas fa-check-shield text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-extrabold text-dark leading-tight">BPOM</p>
+                                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Approved Skincare</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 3: Promo -->
+                        <div class="absolute -bottom-6 -right-6 glass-card p-4 rounded-2xl sm:flex items-center gap-3 animate-float-slow z-20 hidden">
+                            <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 text-white rounded-full flex items-center justify-center shadow-md">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-extrabold text-dark leading-tight">Mulai 99rb</p>
+                                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Promo Facial</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TRUST / KEUNGGULAN ================= -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Keunggulan Klinik</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4 tracking-tight">Kenapa Memilih UP2 Glow Clinic?</h2>
+                <p class="text-gray-500 text-lg">Komitmen kami memberikan standar pelayanan terbaik untuk kecantikan dan kesehatan kulit Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards -->
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">Dokter Profesional</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Ditangani langsung oleh dokter estetika bersertifikat resmi dan berpengalaman.</p>
+                </div>
+                
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">Teknologi Terkini</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Menggunakan alat berstandar internasional FDA Approved untuk hasil maksimal.</p>
+                </div>
+
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">Aman & Bersertifikat</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Seluruh produk skincare dan treatment teruji klinis dan disetujui BPOM.</p>
+                </div>
+
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">Harga Transparan</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Tidak ada biaya tersembunyi. Anda hanya membayar treatment sesuai kesepakatan awal.</p>
+                </div>
+
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">Ruang Nyaman & Steril</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Kenyamanan privasi dengan standar kebersihan (sterilisasi) tingkat rumah sakit.</p>
+                </div>
+
+                <div class="bg-nude-50 p-8 rounded-3xl border border-nude-200 hover:border-brand-200 hover:shadow-[0_10px_40px_rgba(244,63,94,0.08)] transition-all duration-300 transform hover:-translate-y-1.5 group">
+                    <div class="w-14 h-14 bg-white text-brand-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">After-Care Service</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Tim kami selalu siap memantau perkembangan dan hasil treatment Anda secara personal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TREATMENT ================= -->
+    <section id="treatment" class="py-24 bg-nude-50 border-t border-nude-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div class="max-w-2xl">
+                    <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Layanan Unggulan</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Signature Treatment</h2>
+                    <p class="mt-4 text-gray-500 text-lg">Solusi terbaik untuk setiap permasalahan kulit dengan hasil nyata yang memuaskan.</p>
+                </div>
+                <a href="#promo" class="hidden md:inline-flex items-center text-brand-600 font-bold hover:text-brand-700 transition-colors">
+                    Lihat Semua Promo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card Treatment 1 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.1)] border border-brand-50 group transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Facial Brightening" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-brand-500 text-white px-3 py-1.5 rounded-full text-[10px] font-bold shadow-lg uppercase tracking-wider">
+                            Best Seller
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-extrabold text-dark mb-2">Facial Brightening</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Membersihkan komedo dan mengangkat sel kulit mati, dilanjutkan serum pencerah untuk kulit auto-glowing.</p>
+                        
+                        <div class="mt-auto pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Harga Mulai</p>
+                                <p class="text-xl font-bold text-brand-600">Rp 199.000</p>
+                            </div>
+                            <a href="https://wa.link/i8w855" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-brand-50 to-nude-100 text-brand-600 rounded-full font-bold text-xs flex items-center justify-center gap-2 hover:from-brand-500 hover:to-brand-600 hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-brand-100 hover:border-transparent w-full sm:w-auto">
+                                Konsultasi Treatment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Treatment 2 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.1)] border border-brand-50 group transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Acne Treatment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1.5 rounded-full text-[10px] font-bold shadow-lg uppercase tracking-wider">
+                            Promo 30%
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-extrabold text-dark mb-2">Laser Acne Removal</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Membunuh bakteri penyebab jerawat dan meredakan peradangan dengan teknologi laser IPL terkini.</p>
+                        
+                        <div class="mt-auto pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Harga Mulai</p>
+                                <p class="text-xl font-bold text-brand-600">Rp 350.000</p>
+                            </div>
+                            <a href="https://wa.link/i8w855" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-brand-50 to-nude-100 text-brand-600 rounded-full font-bold text-xs flex items-center justify-center gap-2 hover:from-brand-500 hover:to-brand-600 hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-brand-100 hover:border-transparent w-full sm:w-auto">
+                                Booking Sekarang
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Treatment 3 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.1)] border border-brand-50 group transition-all duration-300 flex flex-col">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Skin Booster" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-1.5 rounded-full text-[10px] font-bold shadow-lg uppercase tracking-wider">
+                            Premium Care
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-extrabold text-dark mb-2">DNA Salmon Injection</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Perawatan anti-aging ultimate untuk meregenerasi sel kulit, membuat wajah kenyal, lembab, dan awet muda.</p>
+                        
+                        <div class="mt-auto pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Harga Mulai</p>
+                                <p class="text-xl font-bold text-brand-600">Rp 1.500.000</p>
+                            </div>
+                            <a href="https://wa.link/i8w855" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-brand-50 to-nude-100 text-brand-600 rounded-full font-bold text-xs flex items-center justify-center gap-2 hover:from-brand-500 hover:to-brand-600 hover:text-white transition-all shadow-sm hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-brand-100 hover:border-transparent w-full sm:w-auto">
+                                Konsultasi Treatment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center md:hidden">
+                <a href="#promo" class="inline-flex items-center justify-center w-full px-6 py-4 border border-brand-200 text-base font-bold rounded-xl text-brand-600 bg-white shadow-sm">
+                    Lihat Semua Treatment
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BEFORE & AFTER RESULT ================= -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Clinical Results</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4 tracking-tight">Bukti Nyata Perawatan Kami</h2>
+                <p class="text-gray-500 text-lg">Perubahan terukur dan hasil klinis memuaskan yang dirasakan oleh klien setia UP2 Glow.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Case 1 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-nude-200 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_15px_50px_rgba(244,63,94,0.06)] transition-all duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="font-extrabold text-dark text-xl mb-2">Acne Clear Treatment</h3>
+                        <div class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <i class="fas fa-calendar-check"></i> 4 Minggu Treatment
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-center bg-gray-50 p-1.5 rounded-2xl border border-gray-100 group/ba">
+                        <!-- Clinical Divider -->
+                        <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white z-10 -translate-x-1/2 shadow-sm flex items-center justify-center">
+                            <div class="bg-white text-dark text-[8px] font-black px-1.5 py-2.5 rounded-full border border-gray-100 shadow-md whitespace-nowrap tracking-[0.2em] uppercase">VS</div>
+                        </div>
+                        
+                        <div class="w-1/2 relative overflow-hidden rounded-xl border border-white">
+                            <div class="absolute top-3 left-3 bg-dark/70 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded uppercase tracking-widest z-10">Before</div>
+                            <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=400&q=80" alt="Acne Before" class="w-full aspect-[4/5] object-cover group-hover/ba:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="w-1/2 relative overflow-hidden rounded-xl border border-white">
+                            <div class="absolute top-3 right-3 bg-brand-500/90 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded uppercase tracking-widest shadow-sm z-10">After</div>
+                            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" alt="Acne After" class="w-full aspect-[4/5] object-cover group-hover/ba:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Case 2 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-nude-200 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_15px_50px_rgba(244,63,94,0.06)] transition-all duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="font-extrabold text-dark text-xl mb-2">Melasma & Brightening</h3>
+                        <div class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <i class="fas fa-calendar-check"></i> 6 Minggu Treatment
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-center bg-gray-50 p-1.5 rounded-2xl border border-gray-100 group/ba">
+                        <!-- Clinical Divider -->
+                        <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white z-10 -translate-x-1/2 shadow-sm flex items-center justify-center">
+                            <div class="bg-white text-dark text-[8px] font-black px-1.5 py-2.5 rounded-full border border-gray-100 shadow-md whitespace-nowrap tracking-[0.2em] uppercase">VS</div>
+                        </div>
+                        
+                        <div class="w-1/2 relative overflow-hidden rounded-xl border border-white">
+                            <div class="absolute top-3 left-3 bg-dark/70 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded uppercase tracking-widest z-10">Before</div>
+                            <img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=400&q=80" alt="Melasma Before" class="w-full aspect-[4/5] object-cover group-hover/ba:scale-105 transition-transform duration-700 grayscale-[30%]">
+                        </div>
+                        <div class="w-1/2 relative overflow-hidden rounded-xl border border-white">
+                            <div class="absolute top-3 right-3 bg-brand-500/90 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded uppercase tracking-widest shadow-sm z-10">After</div>
+                            <img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=400&q=80" alt="Melasma After" class="w-full aspect-[4/5] object-cover group-hover/ba:scale-105 transition-transform duration-700 brightness-110 contrast-125">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROMO BANNER ================= -->
+    <section id="promo" class="py-10 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-dark to-indigo-950 rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between">
+                
+                <!-- Background decor -->
+                <div class="absolute -right-20 top-0 w-96 h-96 bg-brand-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-40"></div>
+                <div class="absolute -left-20 bottom-0 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-[80px] opacity-40"></div>
+                
+                <!-- Left: Promo Text -->
+                <div class="relative z-10 text-center md:text-left md:w-1/2 mb-10 md:mb-0">
+                    <div class="inline-flex items-center gap-2 bg-brand-500/20 text-brand-300 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 border border-brand-500/30">
+                        <i class="fas fa-gift"></i> Grand Opening Special
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight">Glow Up Package <br><span class="text-brand-400">Discount up to 30%</span></h2>
+                    
+                    <ul class="text-left text-gray-300 space-y-3 mb-8 max-w-sm mx-auto md:mx-0">
+                        <li class="flex items-start"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> <span>Basic Facial Treatment <strong>mulai 99Rb</strong></span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> <span><strong>FREE</strong> Konsultasi Dokter Spesialis</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-brand-400 mt-1 mr-3"></i> <span><strong>Bonus</strong> Digital Skin Check 3D</span></li>
+                    </ul>
+
+                    <a href="https://wa.link/i8w855" target="_blank" class="inline-flex items-center justify-center px-8 py-4 font-bold rounded-full text-dark bg-white hover:bg-nude-100 shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+                        Klaim Voucher Promo <i class="fas fa-ticket-alt ml-2 text-brand-500"></i>
+                    </a>
+                </div>
+
+                <!-- Right: Countdown -->
+                <div class="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-[2rem] w-full md:w-auto flex flex-col items-center">
+                    <p class="text-white text-sm font-bold uppercase tracking-widest mb-6">Promo Berakhir Dalam:</p>
+                    <div class="flex gap-4 text-center">
+                        <div>
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-dark/50 rounded-2xl flex items-center justify-center border border-white/10 shadow-inner mb-2">
+                                <span class="text-3xl font-extrabold text-white" id="days">03</span>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Hari</span>
+                        </div>
+                        <div>
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-dark/50 rounded-2xl flex items-center justify-center border border-white/10 shadow-inner mb-2">
+                                <span class="text-3xl font-extrabold text-white" id="hours">14</span>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Jam</span>
+                        </div>
+                        <div>
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-brand-500/80 rounded-2xl flex items-center justify-center border border-brand-400/50 shadow-inner shadow-brand-400/20 mb-2">
+                                <span class="text-3xl font-extrabold text-white" id="minutes">45</span>
+                            </div>
+                            <span class="text-[10px] text-gray-300 font-bold uppercase tracking-wider">Menit</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DOKTER & TIM ================= -->
+    <section class="py-24 bg-nude-50 border-t border-nude-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Ekspertise Medis</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4 tracking-tight">Bertemu dengan Ahli Kami</h2>
+                <p class="text-gray-500 text-lg">Didukung oleh tim dokter estetik berpengalaman yang berdedikasi untuk kecantikan kulit Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Doctor 1 -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-brand-50 text-center hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all transform hover:-translate-y-2 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-nude-100 p-1 bg-white shadow-sm relative">
+                        <img src="https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?auto=format&fit=crop&w=400&q=80" alt="Dr. Amira" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-1">dr. Amira Saraswati</h3>
+                    <p class="text-brand-500 text-sm font-semibold mb-3">Aesthetic Doctor</p>
+                    <p class="text-gray-500 text-xs px-4 leading-relaxed mb-6">Spesialis Laser & Anti-Aging dengan pengalaman lebih dari 8 tahun di bidang estetika medis Korea.</p>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-brand-50 text-center hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all transform hover:-translate-y-2 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-brand-100 p-1 bg-white shadow-sm relative">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Dr. Clarissa" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-brand-500 rounded-full flex items-center justify-center text-white text-xs border-2 border-white"><i class="fas fa-star"></i></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-1">dr. Clarissa Wijaya</h3>
+                    <p class="text-brand-500 text-sm font-semibold mb-3">Head of Medical Skin</p>
+                    <p class="text-gray-500 text-xs px-4 leading-relaxed mb-6">Pakar dalam penanganan Acne Scar, Pigmentasi kulit dan injeksi botox/filler bersertifikat internasional.</p>
+                </div>
+
+                <!-- Therapist -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-brand-50 text-center hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all transform hover:-translate-y-2 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-nude-100 p-1 bg-white shadow-sm relative">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Nadia" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-1">Nadia Permata</h3>
+                    <p class="text-brand-500 text-sm font-semibold mb-3">Lead Beauty Therapist</p>
+                    <p class="text-gray-500 text-xs px-4 leading-relaxed mb-6">Terapis kecantikan bersertifikat nasional dengan sentuhan relaksasi pijat wajah yang sangat disukai klien.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIAL ================= -->
+    <section id="testimoni" class="py-24 bg-white border-t border-gray-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Trusted by Thousands</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Kisah Glow Up Mereka</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-nude-50 rounded-[2rem] p-8 border border-nude-200 shadow-sm hover:shadow-lg transition-shadow duration-300 relative">
+                    <div class="flex text-yellow-400 text-sm mb-5 drop-shadow-[0_0_8px_rgba(250,204,21,0.3)]">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic text-sm leading-relaxed mb-8">"Baru 2 kali treatment acne di UP2 Glow, jerawat radang aku langsung kempes dan bekasnya memudar. Pelayanannya juara ramah banget!"</p>
+                    <div class="flex items-center">
+                        <img src="https://ui-avatars.com/api/?name=Diana+R&background=fecdd3&color=f43f5e" alt="Avatar" class="w-12 h-12 rounded-full mr-4 border-2 border-white shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-dark text-sm">Diana R.</h4>
+                            <p class="text-xs text-gray-400">Mahasiswa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-nude-50 rounded-[2rem] p-8 border border-nude-200 shadow-sm hover:shadow-lg transition-shadow duration-300 relative">
+                    <div class="flex text-yellow-400 text-sm mb-5 drop-shadow-[0_0_8px_rgba(250,204,21,0.3)]">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic text-sm leading-relaxed mb-8">"Kulitku super sensitif, tapi dr. Clarissa kasih rekomendasi skin booster yang pas. Hasilnya kulit langsung plumpy, kenyal, dan beneran glowing sehat."</p>
+                    <div class="flex items-center">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+W&background=e0e7ff&color=4f46e5" alt="Avatar" class="w-12 h-12 rounded-full mr-4 border-2 border-white shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-dark text-sm">Sarah Wijaya</h4>
+                            <p class="text-xs text-gray-400">Pekerja Kantoran</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-nude-50 rounded-[2rem] p-8 border border-nude-200 shadow-sm hover:shadow-lg transition-shadow duration-300 relative">
+                    <div class="flex text-yellow-400 text-sm mb-5 drop-shadow-[0_0_8px_rgba(250,204,21,0.3)]">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 italic text-sm leading-relaxed mb-8">"Tempatnya super aesthetic, wangi, bersih, dan menenangkan. Beda banget sama klinik lain. Facialnya gak sakit tapi komedo bersih total."</p>
+                    <div class="flex items-center">
+                        <img src="https://ui-avatars.com/api/?name=Vanya+P&background=dcfce7&color=16a34a" alt="Avatar" class="w-12 h-12 rounded-full mr-4 border-2 border-white shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-dark text-sm">Vanya Putri</h4>
+                            <p class="text-xs text-gray-400">Wiraswasta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CABANG KLINIK ================= -->
+    <section id="lokasi" class="py-20 bg-nude-50 border-t border-nude-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold tracking-widest text-sm uppercase mb-3 block">Lokasi Klinik</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-4">Cabang Klinik Kami</h2>
+                <p class="text-gray-500 text-lg">Hadir lebih dekat untuk memberikan pelayanan kecantikan terbaik di berbagai kota besar Indonesia.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Jakarta -->
+                <div class="bg-white rounded-[2.5rem] p-8 border border-nude-200 shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-bl-[100px] -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-[1.2rem] flex items-center justify-center text-xl mb-6 shadow-sm group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Jakarta Selatan</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Jl. Aesthetic Raya No. 88, Kebayoran Baru, Jakarta Selatan 12110</p>
+                        <div class="flex items-start gap-3 pt-6 border-t border-gray-100">
+                            <i class="fas fa-clock text-brand-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-xs font-bold text-dark mb-1">Jam Operasional</p>
+                                <p class="text-xs text-gray-500">Senin - Sabtu: 09.00 - 20.00<br>Minggu: 10.00 - 18.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bandung -->
+                <div class="bg-white rounded-[2.5rem] p-8 border border-nude-200 shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-[1.2rem] flex items-center justify-center text-xl mb-6 shadow-sm group-hover:bg-blue-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Bandung</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Jl. Dago Boulevard No. 45, Coblong, Kota Bandung 40132</p>
+                        <div class="flex items-start gap-3 pt-6 border-t border-gray-100">
+                            <i class="fas fa-clock text-blue-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-xs font-bold text-dark mb-1">Jam Operasional</p>
+                                <p class="text-xs text-gray-500">Senin - Sabtu: 09.00 - 19.00<br>Minggu: Tutup</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Surabaya -->
+                <div class="bg-white rounded-[2.5rem] p-8 border border-nude-200 shadow-sm hover:shadow-[0_15px_40px_rgba(244,63,94,0.08)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-[100px] -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-[1.2rem] flex items-center justify-center text-xl mb-6 shadow-sm group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Surabaya</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">Jl. Dharmahusada Indah No. 12, Gubeng, Kota Surabaya 60285</p>
+                        <div class="flex items-start gap-3 pt-6 border-t border-gray-100">
+                            <i class="fas fa-clock text-purple-400 mt-0.5"></i>
+                            <div>
+                                <p class="text-xs font-bold text-dark mb-1">Jam Operasional</p>
+                                <p class="text-xs text-gray-500">Senin - Sabtu: 10.00 - 20.00<br>Minggu: 10.00 - 16.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="py-20 bg-nude-50 border-t border-nude-100">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-dark tracking-tight">FAQ (Tanya Jawab)</h2>
+                <p class="mt-4 text-gray-500">Hal yang paling sering ditanyakan oleh klien baru kami.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-colors hover:border-brand-200">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-dark">Apakah treatment di sini aman untuk ibu hamil & menyusui?</span>
+                        <i class="fas fa-chevron-down text-brand-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-0 text-gray-500 text-sm leading-relaxed bg-white">
+                        <p class="pb-5">Ya, kami menyediakan treatment khusus yang formulasinya aman tanpa Retinol/BHA dosis tinggi, dirancang khusus agar aman untuk bumil & busui. Dokter kami akan melakukan asesmen terlebih dahulu.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-colors hover:border-brand-200">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-dark">Apakah wajib reservasi (booking) sebelum datang?</span>
+                        <i class="fas fa-chevron-down text-brand-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-0 text-gray-500 text-sm leading-relaxed bg-white">
+                        <p class="pb-5">Sangat disarankan untuk melakukan reservasi via WhatsApp agar Anda tidak perlu mengantre lama dan bisa mendapatkan slot jam yang paling nyaman untuk Anda.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-colors hover:border-brand-200">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-dark">Apakah ada biaya konsultasi dokter?</span>
+                        <i class="fas fa-chevron-down text-brand-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-0 text-gray-500 text-sm leading-relaxed bg-white">
+                        <p class="pb-5">Konsultasi dokter adalah **GRATIS** jika Anda mengambil paket treatment atau produk pada hari yang sama. Jika hanya berkonsultasi, akan dikenakan biaya registrasi yang terjangkau.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-colors hover:border-brand-200">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-dark">Berapa lama proses satu kali treatment?</span>
+                        <i class="fas fa-chevron-down text-brand-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-0 text-gray-500 text-sm leading-relaxed bg-white">
+                        <p class="pb-5">Rata-rata waktu treatment adalah 60 - 90 menit tergantung jenis paket yang diambil. Area tunggu kami dilengkapi *lounge* nyaman dan *welcome drink*.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-colors hover:border-brand-200">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-dark">Apakah tersedia pembayaran cicilan/paylater?</span>
+                        <i class="fas fa-chevron-down text-brand-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-0 text-gray-500 text-sm leading-relaxed bg-white">
+                        <p class="pb-5">Tersedia kartu kredit, e-wallet dan paylater partner.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-soft-gradient rounded-[3rem] p-10 md:p-16 text-center border border-white relative overflow-hidden shadow-[0_20px_50px_rgba(244,63,94,0.05)]">
+                <!-- Background decoration -->
+                <div class="absolute -top-32 -left-32 w-80 h-80 bg-white/60 rounded-full blur-3xl z-0"></div>
+                <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-brand-200/40 rounded-full blur-3xl z-0"></div>
+                
+                <div class="relative z-10 max-w-2xl mx-auto glass-card p-10 rounded-[2rem]">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-dark mb-4 tracking-tight">Siap Tampil Lebih Percaya Diri?</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-lg">Konsultasikan kebutuhan kulit Anda bersama tim profesional medis kami. Dapatkan penanganan tepat, aman, dan memuaskan hari ini.</p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="https://wa.link/i8w855" target="_blank" class="px-8 py-4 text-base font-bold rounded-full text-white bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 shadow-lg shadow-brand-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp text-xl"></i> Booking WhatsApp
+                        </a>
+                        <a href="#promo" class="px-8 py-4 text-base font-bold rounded-full text-dark bg-white border border-nude-200 hover:bg-nude-50 transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2">
+                            Ambil Promo Spesial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-dark text-white pt-16 pb-8 border-t-4 border-brand-500 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
+                <!-- Brand Info -->
+                <div class="md:col-span-5 flex flex-col items-start">
+                    <div class="flex items-center gap-2 mb-5 group">
+                        <img src="https://lh3.googleusercontent.com/d/1r4OLymlwKHQuuNCIgdUVNAk7BLofBrUf" alt="UP Logo" class="h-10 w-auto object-contain bg-white rounded-lg p-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white">
+                            UP2 <span class="font-light text-brand-300">Glow Clinic</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">Pusat perawatan kulit dan kecantikan modern yang menggabungkan inovasi teknologi medis dengan sentuhan *luxury aesthetic*.</p>
+                    <div class="flex gap-4">
+                        <a href="https://wa.link/i8w855" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-500 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-black transition-colors"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-widest opacity-90">Layanan</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-300 transition-colors">Facial & Peeling</a></li>
+                        <li><a href="#" class="hover:text-brand-300 transition-colors">Laser Treatment</a></li>
+                        <li><a href="#" class="hover:text-brand-300 transition-colors">Anti Aging Injectable</a></li>
+                        <li><a href="#" class="hover:text-brand-300 transition-colors">Slimming Care</a></li>
+                        <li><a href="#" class="hover:text-brand-300 transition-colors">Katalog Skincare</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Location -->
+                <div class="md:col-span-4">
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-widest opacity-90">Lokasi & Jam Buka</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-brand-400 mt-1 mr-3"></i>
+                            <span>Jl. Aesthetic Raya No. 88, Kebayoran Baru, Jakarta Selatan</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-brand-400 mt-1 mr-3"></i>
+                            <div>
+                                <p>Senin - Sabtu: 09.00 - 20.00 WIB</p>
+                                <p>Minggu: 10.00 - 18.00 WIB</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="w-full text-center mb-6 pt-6 border-t border-gray-800/50">
+                <p class="text-[10px] md:text-xs text-brand-300 font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-4 opacity-80 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                    <span class="whitespace-nowrap"><i class="fas fa-user-md mr-1"></i> Dokter Bersertifikat</span> <span class="hidden sm:inline">•</span> 
+                    <span class="whitespace-nowrap"><i class="fas fa-check-circle mr-1"></i> Produk BPOM</span> <span class="hidden sm:inline">•</span> 
+                    <span class="whitespace-nowrap"><i class="fas fa-microscope mr-1"></i> Teknologi FDA Approved</span>
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                <div>
+                    <div class="text-xs text-gray-500 font-medium tracking-wide mb-1" id="copyright-text">
+                        &copy; 2026 UP2 WebKit by UP2 Digi-App. All rights reserved.
+                    </div>
+                    <a href="https://wa.link/i8w855" target="_blank" class="block text-[10px] font-bold text-pink-500 drop-shadow-[0_0_8px_#ec4899] uppercase tracking-widest hover:text-pink-300 transition-colors cursor-pointer">Part of UP2 Digital Ecosystem</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING WHATSAPP ================= -->
+    <div class="fixed bottom-8 right-6 z-[100] flex flex-col items-end gap-2 group">
+        <!-- Tooltip -->
+        <div class="bg-white text-dark text-[10px] font-bold px-3 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0 relative uppercase tracking-wider border border-gray-100">
+            Chat Admin Clinic
+            <div class="absolute -bottom-1 right-5 w-2 h-2 bg-white rotate-45 border-r border-b border-gray-100"></div>
+        </div>
+        <!-- Button -->
+        <a href="https://wa.link/i8w855" target="_blank" class="bg-gradient-to-br from-brand-400 to-brand-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(244,63,94,0.4)] hover:from-brand-500 hover:to-brand-700 transition-all transform hover:scale-110 relative wa-float group-hover:shadow-[0_0_30px_rgba(244,63,94,0.6)] border-2 border-white/50">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-brand-300 opacity-40 animate-ping"></span>
+            <i class="fab fa-whatsapp text-3xl relative z-10"></i>
+        </a>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // 1. Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // 2. Navbar Scroll Interaction
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+                nav.classList.remove('h-20');
+                nav.classList.add('h-16');
+            } else {
+                nav.classList.remove('scrolled');
+                nav.classList.add('h-20');
+                nav.classList.remove('h-16');
+            }
+        });
+
+        // 3. Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const y = targetElement.getBoundingClientRect().top + window.scrollY - 80; // Navbar offset
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // 4. FAQ Accordion Logic
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        faqButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Close all other
+                faqButtons.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        otherBtn.nextElementSibling.classList.remove('open');
+                        otherBtn.querySelector('.faq-icon').classList.remove('open');
+                        otherBtn.classList.remove('text-brand-500');
+                    }
+                });
+
+                // Toggle current
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.faq-icon');
+                content.classList.toggle('open');
+                icon.classList.toggle('open');
+                this.classList.toggle('text-brand-500');
+            });
+        });
+
+        // 5. Mock Countdown Timer (for aesthetics)
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+            const diff = endOfDay - now;
+
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / 1000 / 60) % 60);
+
+            // Just showing static days for promo feel, animating hours/mins
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
+        }
+        setInterval(updateCountdown, 60000); // update every minute
+        updateCountdown();
+
+        // 6. Dynamic Copyright Year
+        document.getElementById('copyright-text').innerHTML = `&copy; ${new Date().getFullYear()} UP2 WebKit by UP2 Digi-App. All rights reserved.`;
+    </script>
+</body>
+</html>
